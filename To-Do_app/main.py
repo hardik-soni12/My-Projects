@@ -13,6 +13,7 @@ db = SQLAlchemy(app)
 class Task(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
+    completed = db.Column(db.Boolean, default=False)
 
 # create the database tables
 with app.app_context():
@@ -39,6 +40,13 @@ def delete(id):
     db.session.delete(task_to_delete)
     db.session.commit()
     return redirect(url_for('home'))
+
+@app.route("/toggle/<int:id>")
+def toggle(id):
+    task = Task.query.get_or_404(id)
+    task.completed = not task.completed
+    db.session.commit()
+    return redirect(url_for("home"))
 
 
 if __name__ ==("__main__"):
