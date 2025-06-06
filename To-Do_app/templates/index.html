@@ -14,9 +14,22 @@
 
     <ul>
         {% for task in tasks %}
-        <li>{{ task.content }}
-            <a href="/delete/{{ task.id }}" style="color: red; margin-left: 10px;">[Delete]</a>
-        </li>
+            <li>
+                <form action="/toggle/{{ task.id }}" method="get" style="display:inline;">
+                    <button type="submit" style="background:none; border:none; color:green;">
+                        {% if task.completed %}
+                            ✅
+                        {% else %}
+                            ⭕
+                        {% endif %}
+                    </button>
+                </form>
+    
+                <span{% if task.completed %} style="text-decoration: line-through;"{% endif %}>{{ task.content }}</span>
+    
+                <a href="/delete/{{ task.id }}" style="color:red; margin-left:10px;">[Delete]</a>
+            </li>
         {% endfor %}
+    </ul>
 </body>
 </html>
