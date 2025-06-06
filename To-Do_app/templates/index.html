@@ -14,7 +14,9 @@
 
     <ul>
         {% for task in tasks %}
-        <li>{{ task.content }}</li>
+        <li>{{ task.content }}
+            <a href="/delete/{{ task.id }}" style="color: red; margin-left: 10px;">[Delete]</a>
+        </li>
         {% endfor %}
 </body>
 </html>

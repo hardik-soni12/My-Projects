@@ -33,6 +33,13 @@ def add():
         db.session.commit()
     return redirect(url_for('home'))
 
+@app.route('/delete/<int:id>')
+def delete(id):
+    task_to_delete = Task.query.get_or_404(id)
+    db.session.delete(task_to_delete)
+    db.session.commit()
+    return redirect(url_for('home'))
+
 
 if __name__ ==("__main__"):
     app.run(debug=True)
