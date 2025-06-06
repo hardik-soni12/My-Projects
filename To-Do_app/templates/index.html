@@ -28,7 +28,11 @@
     
                 <span{% if task.completed %} style="text-decoration: line-through;"{% endif %}>{{ task.content }}</span>
     
-                <a href="/delete/{{ task.id }}" style="color:red; margin-left:10px;">[Delete]</a>
+                <a href="/delete/{{ task.id }}" style="font-size: 20px; color: rgb(29, 18, 44); margin-left: 10px; vertical-align: middle;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M3 6h18v2H3V6zm2 3h14l-1.5 12.5A2 2 0 0 1 15.5 23h-7a2 2 0 0 1-1.99-1.5L5 9zm5 2v9h2v-9H10zm4 0v9h2v-9h-2zM9 4V3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1h5v2H4V4h5z"/>
+                    </svg>
+                </a>
             </li>
         {% endfor %}
     </ul>
