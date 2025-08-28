@@ -11,12 +11,15 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(50), nullable = False, unique = True)
     email = db.Column(db.String(120), nullable = False, unique = True)
     password = db.Column(db.String(200), nullable = False)
+    is_verified = db.Column(db.Boolean, default = False)
 
-def set_password(self,raw_password):
-    self.password = bcrypt.generate_password_hash(raw_password).decode('utf-8')
+    skills = db.relationship('Skill', backref = 'user', lazy = True, cascade='all, delete-orphan')
 
-def check_password(self, attempted_password):
-    return bcrypt.check_password_hash(self.password, attempted_password)
+    def set_password(self,raw_password):
+        self.password = bcrypt.generate_password_hash(raw_password).decode('utf-8')
 
-def __repr__(self):
-    return f'<User {self.username}>'
+    def check_password(self, attempted_password):
+        return bcrypt.check_password_hash(self.password, attempted_password)
+
+    def __repr__(self):
+        return f'<User {self.username}>'

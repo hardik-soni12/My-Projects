@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}My Skills - SkillSwap{% endblock %}
+
+{% block content %}
+<h2>My Skills</h2>
+<a href="{{ url_for('skills_bp.add_skill') }}" class="btn btn-primary mb-3">Add New Skill</a>
+<ul class="list-group">
+  {% for skill in skills %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span>
+        <strong>{{ skill.name }}</strong> 
+        ({{ skill.skill_type }}) - {{ skill.category }} <br>
+        <p><strong>overview : </strong>{{ skill.description }}</p>
+      </span>
+      <span>
+        <a href="{{ url_for('skills_bp.update_skill', skill_id=skill.id) }}" class="btn btn-sm btn-warning">Edit</a>
+        <form action="{{ url_for('skills_bp.delete_skill', skill_id=skill.id) }}" method="post" style="display:inline;">
+          <button type="submit" class="btn btn-sm btn-danger">Delete</button> <br>
+        </form>
+      </span>
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

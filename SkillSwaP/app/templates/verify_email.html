@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Email Verification Required - SkillSwap{% endblock %}
+
+{% block content %}
+<section>
+    <header>
+        <h1>Email Verification Required</h1>
+    </header>
+
+    <article>
+        <p>
+            Hello {{ user.username }}, we've sent a verification link to 
+            <strong><i>{{ user.email }}</i></strong>.  
+            Please check your inbox and click the link to verify your account.
+        </p>
+
+    </article>
+</section>
+{% endblock %}

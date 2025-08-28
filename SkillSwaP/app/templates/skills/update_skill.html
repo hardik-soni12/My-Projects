@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Update Skill - SkillSwap{% endblock %}
+
+{% block content %}
+<h2 class="mb-3">Update Skill</h2>
+
+<form method="POST" action="{{ url_for('skills_bp.update_skill', skill_id=skill.id) }}">
+    {{ form.hidden_tag() }}
+
+    <div class="mb-3">
+        {{ form.name.label(class="form-label") }}
+        {{ form.name(class="form-control") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.skill_type.label(class="form-label") }}
+        {{ form.skill_type(class="form-select") }}
+    </div>
+
+    <div class="mb-3">
+        {{ form.category.label(class="form-label") }}
+        {{ form.category(class="form-control") }}
+    </div>
+    
+    <div class="mb-3">
+        {{ form.description.label(class="form-label") }}
+        {{ form.description(class="form-control") }}
+    </div>
+
+
+    <button type="submit" class="btn btn-warning">Update Skill</button>
+    <a href="{{ url_for('skills_bp.skills') }}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
