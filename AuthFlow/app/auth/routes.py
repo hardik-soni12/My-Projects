@@ -1,5 +1,6 @@
 from flask import Blueprint, request
-from flask_restful import Resource, marshal_with, fields, abort, Api
+from flask_restful import Resource, abort, Api
+from flask_jwt_extended import create_access_token
 
 
 auth_bp = Blueprint("auth_bp", __name__, url_prefix='/auth')
@@ -27,7 +28,8 @@ class Login(Resource):
         email = data.get('email')
         password = data.get('password')
         if email in users_db and users_db[email] == password:
-            return {'token':'fake-jwt-token'}, 201
+            access_token = create_access_token(identity=email)
+            return {'token': access_token}, 201
         return {'error': 'Invalid credentials'}, 401
     
 auth_api.add_resource(Register, '/register')

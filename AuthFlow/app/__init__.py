@@ -1,17 +1,17 @@
 from flask import Flask
 from flask_jwt_extended import JWTManager
-
-
-jwt = JWTManager()
+from flask_restful import Api
+from config import Config
 
 
 def create_app():
     app = Flask(__name__)
 
-    app.config['SECRET_KEY'] = 'my-secret-key'
-    app.config['JWT_SECRET_KEY'] = 'my-jwt-secret-key'
+    app.config.from_object(Config)
 
-    jwt.init_app(app)
+    jwt = JWTManager(app)
+    api = Api(app)
+
 
     from app.auth.routes import auth_bp
     from app.users.routes import users_bp
